@@ -175,4 +175,4 @@ function checknotauthenticated(req,res,next) {
 	next()
 }
 
-app.listen(3000,console.log('server started on http:
+app.listen(3000,console.log('server started'))
