@@ -9,11 +9,12 @@ const session= require('express-session')
 const flash = require('express-flash')
 const passport= require('passport')
 const bcrypt= require('bcrypt')
+// var SequelizeStore = require("connect-session-sequelize")(session.Store);
 const initializepassport= require('./passport-config')
 
 initializepassport(passport,getuserbyemail,getuserbyid)
 
-
+const PORT= process.env.PORT|| 3000
 
 const app = express()
 
@@ -30,7 +31,11 @@ app.use(session({
 	cookie: {
 		expires: 3600000,
 		httpOnly: false
-	}
+	},
+	// store: new SequelizeStore({
+	// 	db: sequelize,
+	// 	checkExpirationInterval: 15 * 60 * 1000
+	// })
 }))
 app.use(flash())
 app.use(passport.initialize())
@@ -175,4 +180,4 @@ function checknotauthenticated(req,res,next) {
 	next()
 }
 
-app.listen(3000,console.log('server started'))
+app.listen(PORT,console.log('server started on https://shopvela.herokuapp.com/ and on port '+ PORT))

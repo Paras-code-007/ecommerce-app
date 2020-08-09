@@ -1,13 +1,14 @@
 const Sequelize= require('sequelize')
 const {DataTypes}= require('sequelize')
-const { use } = require('passport')
+// var SequelizeStore = require("connect-session-sequelize")(session.Store);
 const db= new Sequelize('RLabUD9Ak3','RLabUD9Ak3', 'bYXUExw1gm', {
     host: 'remotemysql.com',
     dialect: 'mysql',
     pool: {
         min: 0,
         max: 5
-    }
+    },
+    // storage: "./session.mysql"
 })
 
 const Users= db.define('users',{
@@ -90,17 +91,41 @@ async function getuserbyid(id) {
             id: id
         }
     })
-
+    
     return user[0]
 }
 
+// var Session = sequelize.define("Session", {
+//     sid: {
+//         type: Sequelize.STRING,
+//         primaryKey: true,
+//     },
+//     userId: Sequelize.STRING,
+//     expires: Sequelize.DATE,
+//     data: Sequelize.STRING(50000),
+// });
+
+// function extendDefaultFields(defaults, session) {
+//     return {
+//         data: defaults.data,
+//         expires: defaults.expires,
+//         userId: session.userId,
+//     };
+// }
+
+// var store = new SessionStore({
+//     db: sequelize,
+//     table: "Session",
+//     extendDefaultFields: extendDefaultFields,
+// });
+
 db.sync()
-    .then(function () {
-        console.log("database has been synced")
-    })
-    .catch(function (err) {
-        console.log("error creating database",err)
-    })
+.then(function () {
+    console.log("database has been synced")
+})
+.catch(function (err) {
+    console.log("error creating database",err)
+})
 
 exports=module.exports={
     db, Users, Products, Carts, getuserbyemail, getuserbyid
