@@ -5,7 +5,7 @@ function initialize(passport,getuserbyemail,getuserbyid) {
     
     async function authenticateUser(email,password,done) {
         try {
-            const user= await getuserbyemail(email)  //because getuserbyemail is async function therfore await it outside because doesnt matter internally it is awaited or not 
+            const user= await getuserbyemail(email)  
 
             if(user==null){
                 return done(null,false, {message: "user not found"})

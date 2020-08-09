@@ -13,7 +13,7 @@ const initializepassport= require('./passport-config')
 
 initializepassport(passport,getuserbyemail,getuserbyid)
 
-// app.set('view engine',hbs) //ReferenceError: Cannot access 'app' before initialization
+
 
 const app = express()
 
@@ -36,12 +36,11 @@ app.use(flash())
 app.use(passport.initialize())
 app.use(passport.session())
 
-// app.use('/api',require('./routes/api/').route)
 
 app.get('/',async function (req,res,next) {
-	// console.log(req.user)
+	
 	const products= await Products.findAll()
-	// console.log(products)
+	
 	res.render('index',{user: req.user, products})
 })
 
@@ -55,7 +54,7 @@ app.get('/register',checknotauthenticated,function (req,res) {
 
 app.post('/register',checknotauthenticated,async function (req,res) {
 	try {
-		// console.log(req.body)
+		
 		let businessstatus= false
 		if(req.body.business){
 			businessstatus= req.body.business
@@ -75,7 +74,7 @@ app.post('/register',checknotauthenticated,async function (req,res) {
 		console.log(user)
 	} catch (err) {
 		console.log(err)
-		res.redirect('/register') //get request
+		res.redirect('/register') 
 	}
 })
 
@@ -95,7 +94,7 @@ app.use('/add',checkauthenticated,function (req,res,next) {
 		return next()
 	}
 	res.redirect('/')
-	// flash messgaes
+	
 })
 
 
@@ -105,13 +104,13 @@ app.get('/add',function (req,res) {
 
 app.post('/add',async function (req,res) {
 	try {
-		// console.log(req.body)
+		
 		const product= await Products.create({
 			name: req.body.name,
 			manufacturer: req.body.manufacturer,
 			price: req.body.price
 		})
-		// console.log(product)
+		
 		res.redirect('/add')
 	} catch (err) {
 		console.log(err)
@@ -126,12 +125,8 @@ app.get('/cart',checkauthenticated,async function (req,res) {
 			userId: req.user.id
 		}
 	})
-	// console.log("test",carts)  //!test Promise { <pending> }       when await was not applied 
-	// console.log(carts)
 
-	// for (const c of carts) {
-	// 	c.createdAt= Date Date.parse(c.createdAt).ti
-	// }
+	
 	let total=0
 	for (const c of carts) {
 		total+= c.product.price
@@ -142,9 +137,7 @@ app.get('/cart',checkauthenticated,async function (req,res) {
 
 app.post('/cart',checkauthenticated,async function (req,res) {
 	try {
-		
-		// console.log(req.user.id)
-		// console.log(req.user)
+
 		console.log(req.body)
 		const cartitem= await Carts.create({
 			userId: req.user.id,
@@ -182,4 +175,4 @@ function checknotauthenticated(req,res,next) {
 	next()
 }
 
-app.listen(3000,console.log('server started on http://localhost:3000'))
+app.listen(3000,console.log('server started on http:

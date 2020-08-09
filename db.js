@@ -1,8 +1,8 @@
 const Sequelize= require('sequelize')
 const {DataTypes}= require('sequelize')
 const { use } = require('passport')
-const db= new Sequelize('shopdb','shopper', 'mypass', {
-    host: 'localhost',
+const db= new Sequelize('RLabUD9Ak3','RLabUD9Ak3', 'bYXUExw1gm', {
+    host: 'remotemysql.com',
     dialect: 'mysql',
     pool: {
         min: 0,
@@ -72,14 +72,14 @@ Carts.belongsTo(Products)
 Users.hasMany(Carts)
 Products.hasMany(Carts)
 
-//functions required for passport verify callback and deserialization
+
 
 async function getuserbyemail(email) {
     const user= await Users.findAll({
         where: {
             email: email
         }
-    })//gives array of user object
+    })
     
     return user[0]
 }
@@ -106,4 +106,3 @@ exports=module.exports={
     db, Users, Products, Carts, getuserbyemail, getuserbyid
 }
 
-//sequelize is promised based
