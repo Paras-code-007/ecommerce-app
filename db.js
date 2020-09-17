@@ -1,7 +1,7 @@
 const Sequelize= require('sequelize')
 const {DataTypes}= require('sequelize')
 // var SequelizeStore = require("connect-session-sequelize")(session.Store);
-const db= new Sequelize('RLabUD9Ak3','RLabUD9Ak3', 'bYXUExw1gm', {
+const db= new Sequelize('J8iRb3T9ti','J8iRb3T9ti', 'XBEKMQYSxk', {
     host: 'remotemysql.com',
     dialect: 'mysql',
     pool: {
@@ -10,6 +10,7 @@ const db= new Sequelize('RLabUD9Ak3','RLabUD9Ak3', 'bYXUExw1gm', {
     },
     // storage: "./session.mysql"
 })
+//mysql-defaultport:3306 therefore not mentioned
 
 const Users= db.define('users',{
     id: {
