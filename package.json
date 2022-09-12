@@ -22,7 +22,8 @@
     "mysql2": "^2.1.0",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
-    "sequelize": "^6.3.3"
+    "sequelize": "^6.3.3",
+    "sqreen": "^2.0.1"
   },
   "devDependencies": {
     "nodemon": "^2.0.4"
